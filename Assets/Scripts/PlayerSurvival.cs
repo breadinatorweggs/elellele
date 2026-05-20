@@ -1,5 +1,3 @@
-# elellele
-dedspsp
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,10 +42,8 @@ public class PlayerSurvival : MonoBehaviour
     void HandleHunger()
     {
         hunger -= hungerDrain * Time.deltaTime;
-
         hunger = Mathf.Clamp(hunger, 0, maxHunger);
 
-        // Lose health if starving
         if (hunger <= 0)
         {
             health -= 5f * Time.deltaTime;
@@ -77,9 +73,12 @@ public class PlayerSurvival : MonoBehaviour
 
     void UpdateUI()
     {
-        healthBar.value = health / maxHealth;
-        hungerBar.value = hunger / maxHunger;
-        staminaBar.value = stamina / maxStamina;
+        if (healthBar != null)
+            healthBar.value = health / maxHealth;
+        if (hungerBar != null)
+            hungerBar.value = hunger / maxHunger;
+        if (staminaBar != null)
+            staminaBar.value = stamina / maxStamina;
     }
 
     public void EatFood(float foodAmount)
@@ -101,6 +100,6 @@ public class PlayerSurvival : MonoBehaviour
     void Die()
     {
         Debug.Log("Player Died");
-        // Add respawn or game over here
+        // Add respawn or game over logic here.
     }
 }
